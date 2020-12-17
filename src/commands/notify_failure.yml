@@ -1,0 +1,17 @@
+description: Notifies Slack of a job failure.
+steps:
+  - run:
+      when: on_fail
+      name: Get workflow name
+      command: |
+        echo 'export CIRCLE_WORKFLOW_NAME=$(curl -H "Content-Type: application/json" -H "Circle-Token: $CIRCLE_API_TOKEN" https://circleci.com/api/v2/workflow/$CIRCLE_WORKFLOW_ID | jq -r ".name")' >> $BASH_ENV
+  # TODO: Add the URL and env var name as a parameter to make this a generic command
+  - run:
+      when: on_fail
+      name: Load Slack template
+      command: |
+        curl https://cdn.signalapis.com/slack-templates/failed-build-template.json -o ~/tmp/templates/failed-build-template.json --create-dirs && \
+        echo 'export FAILED_BUILD_TEMPLATE=$(cat ~/tmp/templates/failed-build-template.json)' >> $BASH_ENV
+  - slack/notify:
+      event: fail
+      template: FAILED_BUILD_TEMPLATE

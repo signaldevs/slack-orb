@@ -1,0 +1,28 @@
+description: |
+  Append the `notify_failure` command at the end of each job.
+  The following environment variables are required to use this orb:
+    - CIRCLE_API_TOKEN: used to retrieve the workflow name since slack does not provide one. See the CircleCI docs on how to generate a token, https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token
+    - SLACK_ACCESS_TOKEN: the OAuth token acquired through the setup guide, https://github.com/CircleCI-Public/slack-orb/wiki/Setup
+    - SLACK_DEFAULT_CHANNEL: a Slack channel ID to post to. You can easily obtain the Slack channel ID by right clicking, and copying a link to the channel. The ID will be visible at the end of the URL
+  It is recommended to create a `slack` context with these env vars and use that context in your workflows. See these docs on how to do so, https://circleci.com/docs/2.0/contexts/#creating-and-using-a-context
+# Provide a use-case based example for using this orb.
+# Everything in the `usage` section will be displayed in the orb registry.
+# Comments are not retained.
+usage:
+  version: 2.1
+  orbs:
+    slack: signaldevs/slack@x.x.x
+  jobs:
+    build:
+      executor: node
+      description: This is an example build job
+      steps:
+        - run:
+            name: Example build command
+            command: npm run build
+        - slack/notify_failure
+  workflows:
+    build_only:
+      jobs:
+        - build:
+            context: slack

@@ -1,0 +1,12 @@
+version: 2.1
+
+description: >
+  Send notifications from a CircleCI workflow to a Slack channel.
+
+# This information will be displayed in the orb registry and is not mandatory.
+display:
+  home_url: "https://github.com/signaldevs/slack-orb"
+  source_url: "https://github.com/signaldevs/slack-orb"
+
+orbs:
+  slack: circleci/slack@4.1.3
