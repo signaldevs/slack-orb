@@ -4,7 +4,10 @@ steps:
       when: on_fail
       name: Get workflow name
       command: |
-        echo 'export CIRCLE_WORKFLOW_NAME=$(curl -H "Content-Type: application/json" -H "Circle-Token: $CIRCLE_API_TOKEN" https://circleci.com/api/v2/workflow/$CIRCLE_WORKFLOW_ID | jq -r ".name")' >> $BASH_ENV
+        echo 'export CIRCLE_WORKFLOW_NAME=$(curl \
+          -H "Content-Type: application/json" \
+          -H "Circle-Token: $CIRCLE_API_TOKEN" \
+          https://circleci.com/api/v2/workflow/$CIRCLE_WORKFLOW_ID | jq -r ".name")' >> $BASH_ENV
   # TODO: Add the URL and env var name as a parameter to make this a generic command
   - run:
       when: on_fail
