@@ -1,13 +1,13 @@
 # @signaldevs/slack-orb
 
-[![CircleCI Build Status](https://circleci.com/gh/signaldevs/slack-orb.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/signaldevs/slack-orb) [![CircleCI Orb Version](https://img.shields.io/badge/endpoint.svg?url=https://badges.circleci.io/orb/signaldevs/slack-orb)](https://circleci.com/orbs/registry/orb/signaldevs/slack-orb) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/signaldevs/slack-orb/master/LICENSE)
+[![CircleCI Build Status](https://circleci.com/gh/signaldevs/slack.svg?style=shield "CircleCI Build Status")](https://circleci.com/gh/signaldevs/slack) [![CircleCI Orb Version](https://img.shields.io/badge/endpoint.svg?url=https://badges.circleci.io/orb/signaldevs/slack)](https://circleci.com/orbs/registry/orb/signaldevs/slack) [![GitHub License](https://img.shields.io/badge/license-MIT-lightgrey.svg)](https://raw.githubusercontent.com/signaldevs/slack/master/LICENSE)
 
 
 A CircleCI orb for sending notifications to a Slack channel. This orb is a light wrapper around the [`circleci/slack`](https://circleci.com/developer/orbs/orb/circleci/slack) orb is order to abstract away some common configuration.
 
 ## Resources
 
-* [CircleCI Orb Registry Page](https://circleci.com/orbs/registry/orb/signaldevs/slack-orb) - The official registry page of this orb for all versions, executors, commands, and jobs described.
+* [CircleCI Orb Registry Page](https://circleci.com/orbs/registry/orb/signaldevs/slack) - The official registry page of this orb for all versions, executors, commands, and jobs described.
 * [CircleCI Orb Docs](https://circleci.com/docs/2.0/orb-intro/#section=configuration) - Docs for using and creating CircleCI Orbs.
 
 ## Issues
