@@ -10,4 +10,4 @@ steps:
         echo 'export RELEASE_VERSION=$(cut -d'/' -f2 \<<<"$CIRCLE_BRANCH")' >> $BASH_ENV
   - slack/notify:
       event: pass
-          template: SUCCESS_NEW_RELEASE_TEMPLATE
+      template: SUCCESS_NEW_RELEASE_TEMPLATE
