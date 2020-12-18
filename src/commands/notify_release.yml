@@ -1,0 +1,13 @@
+description: Notifies Slack of a new release.
+steps:
+  # TODO: Add the URL and env var name as a parameter to make this a generic command
+  - run:
+      when: on_fail
+      name: Load Slack template
+      command: |
+        curl https://cdn.signalapis.com/slack-templates/success-new-release-template.json -o ~/tmp/templates/success-new-release-template.json --create-dirs && \
+        echo 'export SUCCESS_NEW_RELEASE_TEMPLATE=$(cat ~/tmp/templates/success-new-release-template.json)' >> $BASH_ENV \
+        echo 'export RELEASE_VERSION=$(cut -d'/' -f2 \<<<"$CIRCLE_BRANCH")' >> $BASH_ENV
+  - slack/notify:
+      event: pass
+          template: SUCCESS_NEW_RELEASE_TEMPLATE
