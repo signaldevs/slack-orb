@@ -41,7 +41,7 @@ Usage examples should contain clear use-case based example configurations for us
 
 ### How to Publish
 * Create and push a branch with your new features.
-* When ready to publish a new production version, create a Pull Request from fore _feature branch_ to `master`.
+* When ready to publish a new production version, create a Pull Request from fore _feature branch_ to `develop`.
 * The title of the pull request must contain a special semver tag: `[semver:<segement>]` where `<segment>` is replaced by one of the following values.
 
 | Increment | Description|
