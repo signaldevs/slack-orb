@@ -3,9 +3,17 @@ version: 2.1
 description: >
   Send notifications from a CircleCI workflow to a Slack channel.
 
+  The following environment variables are required to use this orb:
+    - CIRCLE_API_TOKEN: used to retrieve the workflow name since slack does not provide one. See the CircleCI docs on
+        how to generate a token, https://circleci.com/docs/2.0/managing-api-tokens/#creating-a-personal-api-token
+    - SLACK_ACCESS_TOKEN: the OAuth token acquired through the setup guide, https://github.com/CircleCI-Public/slack-orb/wiki/Setup
+    - SLACK_DEFAULT_CHANNEL: a Slack channel ID to post to. You can easily obtain the Slack channel ID by right clicking,
+        and copying a link to the channel. The ID will be visible at the end of the URL
+  It is recommended to create a `slack` context with these env vars and use that context in your workflows.
+  See these docs on how to do so, https://circleci.com/docs/2.0/contexts/#creating-and-using-a-context
+
 # This information will be displayed in the orb registry and is not mandatory.
 display:
-  home_url: "https://github.com/signaldevs/slack-orb"
   source_url: "https://github.com/signaldevs/slack-orb"
 
 orbs:
