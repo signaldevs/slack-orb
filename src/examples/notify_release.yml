@@ -1,0 +1,29 @@
+description: |
+  Append the `notify_release` command at the end of a publishing job.
+  This command parses the version from the branch name so a branch
+  name like `release/1.0.0` is required.
+# Provide a use-case based example for using this orb.
+# Everything in the `usage` section will be displayed in the orb registry.
+# Comments are not retained.
+usage:
+  version: 2.1
+  orbs:
+    slack: signaldevs/slack@0.0.3
+  jobs:
+    publish:
+      executor: node
+      description: This is an example publish job
+      steps:
+        - run:
+            name: Example publish command
+            command: npm publish
+        - slack/notify_release
+  workflows:
+    release:
+      jobs:
+        - publish:
+            context: slack
+            filters:
+              branches:
+                only:
+                  - /release\/.*/
