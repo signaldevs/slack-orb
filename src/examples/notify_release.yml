@@ -8,7 +8,7 @@ description: |
 usage:
   version: 2.1
   orbs:
-    slack: signaldevs/slack@0.0.3
+    slack: signaldevs/slack@0.0.4
   jobs:
     publish:
       executor: node
