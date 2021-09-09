@@ -6,7 +6,7 @@ This configuration file uses [orb-tools orb]() version 10 to automatically _pack
 
 **Imported Orbs**
 
-Both orb-tools and a development version of your orb will be imported into the config. On the first run, a `dev:alpha` development tag _must_ exist on your orb, but will be handled automatically from there on.
+Both orb-tools and a development version of your orb will be imported into the config. On the first run, a `dev:beta` development tag _must_ exist on your orb, but will be handled automatically from there on.
 
 **Jobs**
 
