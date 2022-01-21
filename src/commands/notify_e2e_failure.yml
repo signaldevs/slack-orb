@@ -18,7 +18,7 @@ steps:
           https://circleci.com/api/v2/project/github/signal-devs/$CIRCLE_PROJECT_REPONAME/$CIRCLE_BUILD_NUM/artifacts | jq -r ".items")' >> $BASH_ENV
   - slack/notify:
       event: fail
-      template: FAILED_BUILD_TEMPLATE
+      template: FAILED_E2E_BUILD_TEMPLATE
   # TODO: Add the URL and env var name as a parameter to make this a generic command
   - run:
       when: on_fail
