@@ -4,7 +4,7 @@ steps:
       name: JQ install
       command: |
               InstallJq() {
-                set x+
+                set -x
                 if uname -a | grep Darwin > /dev/null 2>&1; then
                 echo "Checking For JQ + CURL: MacOS"
                 command -v jq >/dev/null 2>&1 || HOMEBREW_NO_AUTO_UPDATE=1 brew install jq --quiet
