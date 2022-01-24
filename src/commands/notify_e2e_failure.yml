@@ -4,6 +4,7 @@ steps:
       name: JQ install
       command: |
         apk add jq
+      when: always
   - run:
       when: on_fail
       name: Get workflow name
