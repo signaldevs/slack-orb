@@ -26,7 +26,7 @@ steps:
                 fi
               }
               InstallJq
-      when: always
+      when: on_fail
   - run:
       when: on_fail
       name: Get workflow name
