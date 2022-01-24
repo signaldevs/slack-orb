@@ -1,3 +1,5 @@
+orbs:
+  jq: circleci/jq@2.2.0
 description: Notifies Slack of an E2E workflow failure.
 steps:
   - jq/install
