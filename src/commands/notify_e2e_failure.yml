@@ -1,9 +1,9 @@
 description: Notifies Slack of an E2E workflow failure.
 steps:
   - run:
-    name: JQ install
-    command: |
-      apk add jq
+      name: JQ install
+      command: |
+        apk add jq
   - run:
       when: on_fail
       name: Get workflow name
