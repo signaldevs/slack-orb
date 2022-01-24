@@ -15,7 +15,7 @@ steps:
         echo 'export CIRCLE_ARTIFACTS=$(curl -v \
           -H "Content-Type: application/json" \
           -H "Circle-Token: $CIRCLE_TOKEN" \
-          https://circleci.com/api/v2/project/github/signal-devs/$CIRCLE_PROJECT_REPONAME/$CIRCLE_BUILD_NUM/artifacts | jq -r ".items")' >> $BASH_ENV && \
+          https://circleci.com/api/v2/project/github/signaldevs/$CIRCLE_PROJECT_REPONAME/$CIRCLE_BUILD_NUM/artifacts | jq -r ".items")' >> $BASH_ENV && \
           printenv $CIRCLE_ARTIFACTS && \
           printenv CIRCLE_ARTIFACTS
   - slack/notify:
