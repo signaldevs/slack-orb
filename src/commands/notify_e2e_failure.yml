@@ -15,9 +15,7 @@ steps:
         echo 'export CIRCLE_ARTIFACTS=$(curl \
           -H "Content-Type: application/json" \
           -H "Circle-Token: $CIRCLE_API_TOKEN" \
-          https://circleci.com/api/v2/project/github/signaldevs/$CIRCLE_PROJECT_REPONAME/$CIRCLE_BUILD_NUM/artifacts | jq -r ".items")' >> $BASH_ENV && \
-          printenv $CIRCLE_ARTIFACTS && \
-          printenv CIRCLE_ARTIFACTS
+          https://circleci.com/api/v2/project/github/signaldevs/$CIRCLE_PROJECT_REPONAME/$CIRCLE_BUILD_NUM/artifacts | jq -r ".items")' >> $BASH_ENV
   - slack/notify:
       event: fail
       template: FAILED_E2E_BUILD_TEMPLATE
