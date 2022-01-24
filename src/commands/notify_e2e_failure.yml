@@ -39,7 +39,7 @@ steps:
       when: on_fail
       name: Pull artifacts
       command: |
-         echo TEST=$(curl -H 'Content-Type: application/json' -H "Circle-Token: $CIRCLE_API_TOKEN" https://circleci.com/api/v2/project/github/signaldevs/$CIRCLE_PROJECT_REPONAME/$CIRCLE_BUILD_NUM/artifacts | jq -r ".items" >> $BASH_ENV)
+         echo CIRCLE_ARTIFACTS=$(curl -H 'Content-Type: application/json' -H "Circle-Token: $CIRCLE_API_TOKEN" https://circleci.com/api/v2/project/github/signaldevs/$CIRCLE_PROJECT_REPONAME/$CIRCLE_BUILD_NUM/artifacts | jq -r ".items" >> $BASH_ENV)
 #        echo 'export CIRCLE_ARTIFACTS=$(curl \
 #          -H "Content-Type: application/json" \
 #          -H "Circle-Token: $CIRCLE_API_TOKEN" \
