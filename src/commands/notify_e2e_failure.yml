@@ -42,7 +42,7 @@ steps:
         echo -E 'export CIRCLE_ARTIFACTS=$(curl \
           -H "Content-Type: application/json" \
           -H "Circle-Token: $CIRCLE_API_TOKEN" \
-          https://circleci.com/api/v2/project/github/signaldevs/$CIRCLE_PROJECT_REPONAME/$CIRCLE_BUILD_NUM/artifacts | jq -r ".items | map( { type: \"mrkdwn\", text: (\"<\" + .url + \">\") } )")' >> $BASH_ENV
+          https://circleci.com/api/v2/project/github/signaldevs/$CIRCLE_PROJECT_REPONAME/$CIRCLE_BUILD_NUM/artifacts | jq -r ".items | map(\"<\" + .url + \">\") | join(\" - \")")' >> $BASH_ENV
   - slack/notify:
       event: fail
       template: FAILED_E2E_BUILD_TEMPLATE
