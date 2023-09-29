@@ -20,8 +20,8 @@ steps:
       template: FAILED_BUILD_TEMPLATE
   - slack/notify:
       event: fail
-      # develop => Staging deploys that could've failed 
-      # main => Staging or Production deploys that could've failed 
+      # develop => Staging deploys that could've failed
+      # main => Staging or Production deploys that could've failed
       # master => Production deploy that could've failed
       # autorelease => Production deploy that could've failed
       # In each case if there is a failure on these branches it could potentially block production deployments
