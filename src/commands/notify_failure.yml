@@ -29,3 +29,4 @@ steps:
       # This is for a new alerts-dev-ops-production channel
       # The channel is meant for high importance CI/CD alerts that could affect production deployments
       channel: C05US7T31QR
+      template: FAILED_BUILD_TEMPLATE
