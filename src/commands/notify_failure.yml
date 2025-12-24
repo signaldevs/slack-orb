@@ -1,5 +1,19 @@
 description: Notifies Slack of a job failure.
+parameters:
+  debug:
+    description: Enable to view full payload sent to Slack
+    type: boolean
+    default: false
 steps:
+  - jq/install
+  - run:
+      when: on_fail
+      name: Check curl availability
+      command: |
+        if ! command -v curl &> /dev/null; then
+          echo "Error: curl command not found. Please ensure curl is installed in your executor."
+          exit 1
+        fi
   - run:
       when: on_fail
       name: Get workflow name
@@ -18,6 +32,11 @@ steps:
   - slack/notify:
       event: fail
       template: FAILED_BUILD_TEMPLATE
+      retries: 2
+      retry_delay: 60
+      unfurl_links: true
+      unfurl_media: false
+      debug: << parameters.debug >>
   - slack/notify:
       event: fail
       # develop => Staging deploys that could've failed
@@ -30,3 +49,8 @@ steps:
       # The channel is meant for high importance CI/CD alerts that could affect production deployments
       channel: C05US7T31QR
       template: FAILED_BUILD_TEMPLATE
+      retries: 3
+      retry_delay: 60
+      unfurl_links: true
+      unfurl_media: false
+      debug: << parameters.debug >>

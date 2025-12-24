@@ -1,13 +1,34 @@
 description: Notifies Slack of a new release.
+parameters:
+  debug:
+    description: Enable to view full payload sent to Slack
+    type: boolean
+    default: false
 steps:
+  - run:
+      name: Check curl availability
+      command: |
+        if ! command -v curl &> /dev/null; then
+          echo "Error: curl command not found. Please ensure curl is installed in your executor."
+          exit 1
+        fi
   # TODO: Add the URL and env var name as a parameter to make this a generic command
   - run:
-      when: on_fail
       name: Load Slack template
       command: |
         curl https://cdn.signalapis.com/slack-templates/success-new-release-template.json -o ~/tmp/templates/success-new-release-template.json --create-dirs && \
-        echo 'export SUCCESS_NEW_RELEASE_TEMPLATE=$(cat ~/tmp/templates/success-new-release-template.json)' >> $BASH_ENV \
-        echo 'export RELEASE_VERSION=$(cut -d'/' -f2 \<<<"$CIRCLE_BRANCH")' >> $BASH_ENV
+        echo 'export SUCCESS_NEW_RELEASE_TEMPLATE=$(cat ~/tmp/templates/success-new-release-template.json)' >> $BASH_ENV
+  - run:
+      name: Parse release version from branch name
+      command: |
+        RELEASE_VERSION=$(echo "$CIRCLE_BRANCH" | cut -d'/' -f2)
+        echo "Parsed release version: $RELEASE_VERSION"
+        echo "export RELEASE_VERSION=$RELEASE_VERSION" >> $BASH_ENV
   - slack/notify:
       event: pass
       template: SUCCESS_NEW_RELEASE_TEMPLATE
+      retries: 1
+      retry_delay: 30
+      unfurl_links: true
+      unfurl_media: true
+      debug: << parameters.debug >>
