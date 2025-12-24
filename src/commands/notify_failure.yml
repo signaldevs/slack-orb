@@ -1,7 +1,14 @@
 description: Notifies Slack of a job failure.
 steps:
-  - curl/install
   - jq/install
+  - run:
+      when: on_fail
+      name: Check curl availability
+      command: |
+        if ! command -v curl &> /dev/null; then
+          echo "Error: curl command not found. Please ensure curl is installed in your executor."
+          exit 1
+        fi
   - run:
       when: on_fail
       name: Get workflow name

@@ -28,7 +28,7 @@ The repository uses CircleCI's orb-tools pipeline for development:
 ### Orb Structure
 CircleCI orbs are packaged YAML configurations. This orb follows the standard structure:
 
-- `src/@orb.yml` - Main orb metadata, description, and imports the base `circleci/slack@6.1.2` orb along with `circleci/curl@2.1.0` and `circleci/jq@3.0.0` for tool installation
+- `src/@orb.yml` - Main orb metadata, description, and imports the base `circleci/slack@6.1.2` orb along with `circleci/jq@3.0.0` for jq installation
 - `src/commands/*.yml` - Reusable command definitions
 - `src/examples/*.yml` - Usage examples displayed in the orb registry
 
@@ -36,7 +36,7 @@ CircleCI orbs are packaged YAML configurations. This orb follows the standard st
 
 **notify_failure** (`src/commands/notify_failure.yml`)
 - Executes on job failure (`when: on_fail`)
-- Installs curl and jq via circleci orbs
+- Installs jq via circleci orb and checks for curl availability (fails if curl not found)
 - Fetches workflow name via CircleCI API using `CIRCLE_API_TOKEN`
 - Downloads custom template from `https://cdn.signalapis.com/slack-templates/failed-build-template.json`
 - Sends two notifications with retry logic (2-3 retries):
@@ -45,7 +45,7 @@ CircleCI orbs are packaged YAML configurations. This orb follows the standard st
 
 **notify_release** (`src/commands/notify_release.yml`)
 - Executes on job success for release notifications
-- Installs curl via circleci orb
+- Checks for curl availability (fails if curl not found)
 - Extracts release version from branch name format: `release/X.Y.Z`
 - Downloads template from `https://cdn.signalapis.com/slack-templates/success-new-release-template.json`
 - Posts to `SLACK_DEFAULT_CHANNEL` with retry logic (1 retry)
@@ -103,9 +103,9 @@ This orb uses CircleCI Slack Orb v6.1.2, which introduced several enhancements:
 - notify_e2e_failure: Command removed as it is no longer needed
 
 **Tool Installation:**
-- Commands now use circleci/curl and circleci/jq orbs to ensure curl and jq are installed
-- notify_failure: Installs both curl and jq (needed for API calls and JSON parsing)
-- notify_release: Installs curl (needed for template download)
+- Commands use circleci/jq orb to install jq (needed for JSON parsing)
+- Commands check for curl availability before use and fail with clear error if not found
+- Most CircleCI convenience images include curl by default
 
 **Parameters NOT Currently Used (Future Considerations):**
 - `thread_id` - Could enable threaded conversations

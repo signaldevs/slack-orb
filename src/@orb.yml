@@ -18,5 +18,4 @@ display:
 
 orbs:
   slack: circleci/slack@6.1.2
-  curl: circleci/curl@2.1.0
   jq: circleci/jq@3.0.0

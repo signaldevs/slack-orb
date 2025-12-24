@@ -1,6 +1,13 @@
 description: Notifies Slack of a new release.
 steps:
-  - curl/install
+  - run:
+      when: on_fail
+      name: Check curl availability
+      command: |
+        if ! command -v curl &> /dev/null; then
+          echo "Error: curl command not found. Please ensure curl is installed in your executor."
+          exit 1
+        fi
   # TODO: Add the URL and env var name as a parameter to make this a generic command
   - run:
       when: on_fail
