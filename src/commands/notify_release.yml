@@ -21,7 +21,7 @@ steps:
   - run:
       name: Parse release version from branch name
       command: |
-        RELEASE_VERSION=$(cut -d'/' -f2 <<<"$CIRCLE_BRANCH")
+        RELEASE_VERSION=$(echo "$CIRCLE_BRANCH" | cut -d'/' -f2)
         echo "Parsed release version: $RELEASE_VERSION"
         echo "export RELEASE_VERSION=$RELEASE_VERSION" >> $BASH_ENV
   - slack/notify:
