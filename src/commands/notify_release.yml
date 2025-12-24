@@ -1,5 +1,6 @@
 description: Notifies Slack of a new release.
 steps:
+  - curl/install
   # TODO: Add the URL and env var name as a parameter to make this a generic command
   - run:
       when: on_fail
@@ -11,3 +12,7 @@ steps:
   - slack/notify:
       event: pass
       template: SUCCESS_NEW_RELEASE_TEMPLATE
+      retries: 1
+      retry_delay: 30
+      unfurl_links: true
+      unfurl_media: true
