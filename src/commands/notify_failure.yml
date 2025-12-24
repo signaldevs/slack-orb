@@ -1,4 +1,9 @@
 description: Notifies Slack of a job failure.
+parameters:
+  debug:
+    description: Enable to view full payload sent to Slack
+    type: boolean
+    default: false
 steps:
   - jq/install
   - run:
@@ -31,6 +36,7 @@ steps:
       retry_delay: 60
       unfurl_links: true
       unfurl_media: false
+      debug: << parameters.debug >>
   - slack/notify:
       event: fail
       # develop => Staging deploys that could've failed
@@ -47,3 +53,4 @@ steps:
       retry_delay: 60
       unfurl_links: true
       unfurl_media: false
+      debug: << parameters.debug >>

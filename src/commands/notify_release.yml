@@ -1,7 +1,11 @@
 description: Notifies Slack of a new release.
+parameters:
+  debug:
+    description: Enable to view full payload sent to Slack
+    type: boolean
+    default: false
 steps:
   - run:
-      when: on_fail
       name: Check curl availability
       command: |
         if ! command -v curl &> /dev/null; then
@@ -10,7 +14,6 @@ steps:
         fi
   # TODO: Add the URL and env var name as a parameter to make this a generic command
   - run:
-      when: on_fail
       name: Load Slack template
       command: |
         curl https://cdn.signalapis.com/slack-templates/success-new-release-template.json -o ~/tmp/templates/success-new-release-template.json --create-dirs && \
@@ -23,3 +26,4 @@ steps:
       retry_delay: 30
       unfurl_links: true
       unfurl_media: true
+      debug: << parameters.debug >>

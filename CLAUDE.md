@@ -42,6 +42,8 @@ CircleCI orbs are packaged YAML configurations. This orb follows the standard st
 - Sends two notifications with retry logic (2-3 retries):
   1. Standard failure notification to `SLACK_DEFAULT_CHANNEL`
   2. Critical branch failures (main/master/autorelease/develop) to hardcoded channel `C05US7T31QR` (alerts-dev-ops-production)
+- Parameters:
+  - `debug` (boolean, default: false): Enable to view full Slack payload for debugging
 
 **notify_release** (`src/commands/notify_release.yml`)
 - Executes on job success for release notifications
@@ -49,6 +51,8 @@ CircleCI orbs are packaged YAML configurations. This orb follows the standard st
 - Extracts release version from branch name format: `release/X.Y.Z`
 - Downloads template from `https://cdn.signalapis.com/slack-templates/success-new-release-template.json`
 - Posts to `SLACK_DEFAULT_CHANNEL` with retry logic (1 retry)
+- Parameters:
+  - `debug` (boolean, default: false): Enable to view full Slack payload for debugging
 
 ### Required Environment Variables
 
